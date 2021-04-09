@@ -19,6 +19,23 @@
 #?(:clj (println :reload (str *ns*)))
 
 
+;;;;;;;;;;
+
+
+(defn hook-test
+
+  ;;
+
+  {:shadow.build/stages #{:compile-finish
+                          :configure}}
+
+  [x]
+
+  (println :hook-test x))
+
+
+;;;;;;;;;;
+
 
 (comment
 

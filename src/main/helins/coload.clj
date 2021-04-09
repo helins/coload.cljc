@@ -19,7 +19,7 @@
   (:import java.io.File))
 
 
-;;;;;;;;;;
+;;;;;;;;;; State
 
 
 (defn- -state
@@ -40,17 +40,7 @@
   (atom (-state)))
 
 
-
-(defn compile-cycle
-
-  ""
-
-  []
-
-  (-> -*state
-      deref
-      :compile-cycle))
-
+;;;;;;;;;; Private helpers for Hawk (file watching library)
 
 
 (defn- -hawk-handler
@@ -83,6 +73,8 @@
 
   (clojure.tools.namespace.file/clojure-file? file))
 
+
+;;;;;;;;;; Shadow-CLJS hook - Private helpers
 
 
 (defn- -exec-plugin-hook+
@@ -155,33 +147,10 @@
     tracker-2))
 
 
+;;;;;;;;;; Shadow-CLJS hook - Compiler steps
 
 
-(defn clear!
-
-  ""
-
-  []
-
-  (-> (swap! -*state
-             (fn [{:as   state
-                   :keys [path+
-                          tracker]}]
-               (cond->
-                 state
-                 (seq path+)
-                 (assoc :tracker
-                        (delay
-                          (-> @tracker
-                              (dissoc :clojure.tools.namespace.dir/time)
-                              (clojure.tools.namespace.dir/scan-dirs path+)))))))
-      :tracker
-      deref)
-  nil)
-
-
-
-(defn configure
+(defn- -shadow-configure
 
   ""
 
@@ -237,7 +206,7 @@
 
 
 
-(defn compile-prepare
+(defn- -shadow-compile-prepare
 
   ""
 
@@ -256,8 +225,10 @@
   nil)
 
 
+;;;;;;;;;; Shadow-CLJS hook - Core implementation
 
-(defn shadow-cljs-hook
+
+(defn hook
 
   ""
 
@@ -279,8 +250,8 @@
       :compile-finish  (-exec-plugin-hook+ stage
                                            plugin+
                                            nil)
-      :compile-prepare (compile-prepare plugin+)
-      :configure       (configure plugin+))
+      :compile-prepare (-shadow-compile-prepare plugin+)
+      :configure       (-shadow-configure plugin+))
     (catch Throwable e
       (log/fatal e
                  (format "During compilation stage %s"
@@ -288,15 +259,39 @@
   build)
 
 
+;;;;;;;;;; Rest of API
 
 
-(defn ^:no-doc -plugin-test
+(defn clear!
 
-  ;;
+  ""
 
-  {:shadow.build/stages #{:compile-finish
-                          :configure}}
+  []
 
-  [x]
+  (-> (swap! -*state
+             (fn [{:as   state
+                   :keys [path+
+                          tracker]}]
+               (cond->
+                 state
+                 (seq path+)
+                 (assoc :tracker
+                        (delay
+                          (-> @tracker
+                              (dissoc :clojure.tools.namespace.dir/time)
+                              (clojure.tools.namespace.dir/scan-dirs path+)))))))
+      :tracker
+      deref)
+  nil)
 
-  (println :plugin-hook-test x))
+
+
+(defn compile-cycle
+
+  ""
+
+  []
+
+  (-> -*state
+      deref
+      :compile-cycle))

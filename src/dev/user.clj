@@ -7,7 +7,7 @@
 
   "For daydreaming at the REPL."
 
-  (:require [helins.coload.dev :as coload.dev]))
+  (:require [helins.coload.dev]))
         
 
 ;;;;;;;;;;

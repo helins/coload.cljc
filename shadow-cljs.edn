@@ -1,7 +1,7 @@
 {:builds
  {:dev
   {:asset-path  "/js"
-   :build-hooks [(helins.coload/shadow-cljs-hook {helins.coload/-plugin-test {:src ["src/dev"]}})]
+   :build-hooks [(helins.coload/hook {helins.coload.dev/hook-test {:src ["src/dev"]}})]
    :modules     {:main {:entries [helins.coload.dev]}}
    :output-dir  "cljs/js"
    :target      :browser}}
