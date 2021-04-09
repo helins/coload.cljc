@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-
-env HELINS_MEDIUM_TEST=cljs-dev ./bin/test/node/shadow compile "$@"

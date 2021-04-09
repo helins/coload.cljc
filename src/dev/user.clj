@@ -7,10 +7,10 @@
 
   "For daydreaming at the REPL."
 
-  (:require [helins.medium.dev :as medium.dev]))
+  (:require [helins.coload.dev :as coload.dev]))
         
 
 ;;;;;;;;;;
 
 
-(medium.dev/on-load)
+

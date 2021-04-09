@@ -1,20 +1,10 @@
 {:builds
  {:dev
-  {:asset-path       "/js"
-   :build-hooks      [(helins.medium.co-load/shadow-cljs-hook {helins.medium.co-load/-plugin-test {:medium.co-load/path+ ["src/dev"]}})]
-   :compiler-options {:infer-externs :auto}
-   :devtools         {:after-load helins.medium.dev/on-load
-                      :preloads   [shadow.remote.runtime.cljs.browser]}
-   :modules          {:main {:entries [helins.medium.dev]
-                             :init-fn helins.medium.dev/on-load}}
-   :output-dir       "cljs/js"
-   :target           :browser}
-
- :test-node
- {:build-options {:cache-level :off}
-  :ns-regexp     ".+"
-  :output-to     "compiled/node/test.js"
-  :target        :node-test}}
+  {:asset-path  "/js"
+   :build-hooks [(helins.coload/shadow-cljs-hook {helins.coload/-plugin-test {:src ["src/dev"]}})]
+   :modules     {:main {:entries [helins.coload.dev]}}
+   :output-dir  "cljs/js"
+   :target      :browser}}
 
  :deps
  {:alias [:cljs]}
@@ -23,5 +13,4 @@
  {8000 "cljs"}
  
  :nrepl
- {:port 14563}
- }
+ {:port 14563}}

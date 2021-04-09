@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-
-env HELINS_MEDIUM_TEST=cljs-release ./bin/test/node/shadow release "$@"

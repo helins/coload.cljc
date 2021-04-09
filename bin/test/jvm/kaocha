@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-
-env HELINS_MEDIUM_TEST=clojure clojure -M:kaocha:test -m kaocha.runner --config-file kaocha.edn :jvm "$@"

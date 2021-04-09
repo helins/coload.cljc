@@ -3,9 +3,9 @@
 ;; file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-(ns helins.medium.dev-2
+(ns helins.coload.dev-2
 
-  ""
+  "See [[helins.coload.dev]]."
 
   {:author "Adam Helinski"})
 

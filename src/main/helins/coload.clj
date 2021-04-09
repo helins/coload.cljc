@@ -3,7 +3,7 @@
 ;; file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-(ns helins.medium.co-load
+(ns helins.coload
 
   ""
 
@@ -142,9 +142,9 @@
                         load+)))
     (-exec-plugin-hook+ stage
                         plugin+
-                        {:medium.co-load/load+   load+
-                         :medium.co-load/stage   stage
-                         :medium.co-load/unload+ remove+}))
+                        {:coload/load+   load+
+                         :coload/stage   stage
+                         :coload/unload+ remove+}))
   (let [tracker-2 (clojure.tools.namespace.reload/track-reload tracker)]
     (when-some [err (tracker-2 :clojure.tools.namespace.reload/error)]
       (log/fatal err
@@ -189,7 +189,7 @@
 
   (let [path+       (not-empty (into #{}
                                      (comp (map second)
-                                           (mapcat :medium.co-load/path+)
+                                           (mapcat :src)
                                            (map #(.getCanonicalPath (File. %))))
                                      plugin+))
         [state-old

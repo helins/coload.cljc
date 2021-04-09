@@ -10,8 +10,7 @@
    :extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}}
 
   :dev
-  {:extra-paths ["src/dev"
-                 "src/test"]
+  {:extra-paths ["src/dev"]
    :extra-deps {org.clojure/test.check {:mvn/version "0.10.0"}}}
 
   :jar
@@ -24,13 +23,7 @@
   {:exec-args  {:artifact  "compiled/jvm/release.jar"
                 :installer :local}
    :exec-fn    deps-deploy.deps-deploy/deploy
-   :extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}}
-
-  :kaocha
-  {:extra-deps {lambdaisland/kaocha {:mvn/version "1.0.829"}}}
-
-  :test
-  {:extra-paths ["src/test"]}}
+   :extra-deps {slipset/deps-deploy {:mvn/version "0.1.5"}}}}
  
  :deps
  {com.taoensso/timbre         {:mvn/version "5.1.1"}

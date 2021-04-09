@@ -1,3 +1,0 @@
-;; Used in tests
-
-{:a [b "c" #{4}]}
