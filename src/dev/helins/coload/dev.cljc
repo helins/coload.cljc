@@ -29,9 +29,9 @@
   {:shadow.build/stages #{:compile-finish
                           :configure}}
 
-  [x]
+  [param]
 
-  (println :hook-test x))
+  (println :hook-test param))
 
 
 ;;;;;;;;;;
